@@ -1,0 +1,22 @@
+<html>
+    <body>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="check_credenziali()">Login</button>
+        <script>
+            function check_credenziali(){
+                var username = "admin";
+                var password = "passwordsupersegreta";
+    
+                var username_inserito = document.getElementById("username").value;
+                var password_inserita = document.getElementById("password").value;
+    
+                if (username == username_inserito && password == password_inserita){
+                    alert("Benveuto admin!");
+                } else {
+                    alert("Credenziali errate!");
+                }
+            }
+        </script>
+    </body>
+</html>
