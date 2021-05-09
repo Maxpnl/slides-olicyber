@@ -1,0 +1,20 @@
+{
+  "name": "superslides",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "fusuma": "^2.8.3",
+    "react-shadow": "^19.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "fusuma start",
+    "start:prod": "fusuma start-prod",
+    "build": "fusuma build",
+    "deploy": "npm run build && fusuma deploy",
+    "pdf": "npm run build && fusuma pdf"
+  },
+  "author": "",
+  "license": "ISC"
+}

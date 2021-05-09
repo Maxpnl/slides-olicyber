@@ -1,0 +1,22 @@
+# Come si approccia una chall web?
+
+Hai il codice? -> Guarda dove viene usato l'input, controlla le funzioni a cui lo passa e cosa fanno
+
+
+Non hai il codice? -> Cerca di capire cosa vuole implementare e come potrebbe averlo fatto, prova input con caratteri speciali e vedi che succede
+
+
+---
+
+## Chiedetevi sempre qual'è il vostro obiettivo
+
+Nel vostro caso quindi, dov'è la flag?
+
+- Nel db? -> SQL injection
+- Su un file? -> Path trasversal / LFI / RCE / ...
+- In una variabile php? -> Potete fare RCE dentro il contesto in cui siete?
+- La può vedere solo l'admin?
+
+
+- L'admin visita i vostri link in qualche modo? -> XSS / attacchi al client
+- Altrimenti -> SQL injection

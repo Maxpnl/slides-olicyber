@@ -1,0 +1,79 @@
+<!-- classes: title -->
+
+## Come funziona / a cosa serve un database
+
+<!-- fragments-start -->
+I database servono per immagazzinare e restituire dati, tipicamente è il backend a collegarsi al database e fare operazioni su di esso
+
+I database più famosi mettono a disposizione del backend un dialetto SQL, tramite il quale può fare le operazioni, un esempio sono MySQL e SQLite3
+
+Un database è composto da delle tabelle, un esempio potrebbe essere una tabella di nome `utenti`
+
+Le tabelle a loro volta contengono delle colonne, le colonne hanno un nome ed un tipo (ed altro)
+
+Sulle righe della tabella vengono salvati i dati, ad esempio, sulla prima ci potrebbero essere quelli dell'utente _pippo_ mentre sulla seconda dell'utente _pluto_
+
+<!-- fragments-end -->
+
+
+---
+
+## Esempio di tabella (utenti) 
+
+import { ExampleDatabase } from '../scripts/Examples';
+
+<ExampleDatabase />
+
+---
+
+## Comandi per gestire la struttura delle tabelle
+
+```sql
+CREATE TABLE utenti (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, password TEXT)
+```
+
+```sql
+ALTER TABLE utenti ADD codice_fiscale VARCHAR(100)
+```
+
+```sql
+DROP TABLE utenti
+```
+
+```sql
+TRUNCATE TABLE utenti
+```
+
+---
+
+## Comandi per gestire i dati delle tabelle
+
+```sql
+SELECT colonna1, colonna2 FROM utenti WHERE colonna3='valore' LIMIT 0,2
+```
+
+```sql
+INSERT INTO utenti (email, nome) VALUES ("paperino@ducky.com", "Paperino");
+INSERT INTO utenti VALUES (1, "paperino", ...)
+```
+
+```sql
+UPDATE utenti SET password='newpass' WHERE password LIKE '%123' 
+```
+
+---
+
+## Connettersi al DB da PHP
+Si può usare **mysqli** oppure **PDO** (esisteva pure **mysql** ma è deprecato)
+
+```php
+<?php
+$mysqli = new mysqli("localhost","my_user","my_password","my_db");
+
+// Perform query
+$result = $mysqli -> query("SELECT * FROM utenti ");
+print_r($result -> fetch_all());
+
+$mysqli -> close();
+?>
+```
