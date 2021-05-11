@@ -1,0 +1,240 @@
+<<<<<<< HEAD:slides/1-methods-headers.mdx
+<!-- classes: title -->
+<!-- section-title: richieste http -->
+## I metodi di richiesta HTTP
+I metodi HTTP e ciò che (tipicamente) dovrebbero fare. L'implementazione tuttavia è lasciata allo sviluppatore
+<!-- fragments-start -->
+<!-- block-start: methods -->
+`GET`: Metodo senza corpo, usato tipicamente per accedere a una risorsa (prendendone headers e corpo)
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`HEAD`: Metodo senza corpo, usato tipicamente per accedere a una risorsa (prendendone solo gli headers)
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`DELETE`: Metodo senza corpo, usato tipicamente per cancellare una risorsa
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`OPTIONS`: Metodo senza corpo, usato per sapere quali metodi accetta un determinato endpoint (path)
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`POST` / `PUT` / `PATCH`: Metodi con corpo, usati tipicamente per inserire / modificare / modificare parzialmente un'entità
+<!-- block-end: methods -->
+
+<!-- fragments-end -->
+
+---
+
+
+---
+<!-- section-title: risposte http -->
+
+## I codici di risposta HTTP
+<!-- fragments-start -->
+<!-- block-start: methods -->
+`2xx`: Indica tipicamente uno stato di successo, il più famoso è 200
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`3xx`: Indica tipicamente un redirect, i più famosi sono 301 (permanente) e 302 (temporaneo)
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`4xx`: Indica la presenza di un errore nella richiesta del client, i più famosi sono 403 (forbidden), 404 (Not Found), 405 (method not allowed), *418 (I'm a teapot), LOL*
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`5xx`: Indica la presenza di un errore nella risposta del server, i più famosi sono 500 (Internal Server Error), 502 (Bad Gateway), 503 (Service Unavailable), 504 (Gateway Timeout)
+<!-- block-end: methods -->
+
+<!-- fragments-end -->
+
+---
+
+---
+<!-- section-title: headers richieste -->
+
+## Alcuni headers importanti (richiesta)
+
+<!-- fragments-start -->
+`Accept: text/html`
+
+`Accept-Encoding: gzip, deflate, br`
+
+`Referrer: https://link.da/cui/?sono=arrivato`
+
+`Cookie: PHPSESSID=123456; GDPRAccettata=1; chiave=valore`
+
+`Authorization: Bearer token`
+
+<!-- fragments-end -->
+<!--
+`Origin: https://link.da.cui.sto.facendo.una.chiamata`
+`Access-Control-Request-Headers: X-Custom-Header, Upgrade-Insecure-Requests`
+
+`Access-Control-Request-Method: POST, GET, OPTIONS`
+-->
+
+---
+<!-- section-title: MIME types -->
+
+### I MIME types
+
+import { IFrame } from '../scripts/IFrame';
+
+<IFrame src="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types"/>
+
+---
+<!-- section-title: headers risposte -->
+## Alcuni headers importanti (risposta)
+
+<!--
+
+`Access-Control-Allow-Origin: http://localhost:8000`
+
+`Access-Control-Allow-Credentials: true`
+
+`Access-Control-Allow-Headers: X-Custom-Header, Upgrade-Insecure-Requests`
+
+`Access-Control-Allow-Methods: POST, GET, OPTIONS`
+
+`X-Frame-Options: DENY`
+
+`Content-Security-Policy: default-src 'self' http://example.com; script-src *.google.com;`
+
+-->
+<!-- fragments-start -->
+`Server: Apache/2.2.14 (Win32)`
+
+`Allow: OPTIONS, GET, HEAD, POST`
+
+`Content-Disposition: attachment; filename="filename.jpg"`
+
+`Content-Type: text/html; charset=UTF-8`
+
+`Content-Length: 8`
+
+`Location: /index.html`
+
+`Set-Cookie: PHPSESSID=123456; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly`
+
+<!-- fragments-end -->
+
+---
+
+## Ok, questo è come comunicano, ma come faccio a vedere le pagine?
+=======
+<!-- classes: title -->
+
+## I metodi di richiesta HTTP
+I metodi HTTP e ciò che (tipicamente) dovrebbero fare. L'implementazione tuttavia è lasciata allo sviluppatore
+<!-- fragments-start -->
+<!-- block-start: methods -->
+`GET`: Metodo senza corpo, usato tipicamente per accedere a una risorsa (prendendone headers e corpo)
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`HEAD`: Metodo senza corpo, usato tipicamente per accedere a una risorsa (prendendone solo gli headers)
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`DELETE`: Metodo senza corpo, usato tipicamente per cancellare una risorsa
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`OPTIONS`: Metodo senza corpo, usato per sapere quali metodi accetta un determinato endpoint (path)
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`POST` / `PUT` / `PATCH`: Metodi con corpo, usati tipicamente per inserire / modificare / modificare parzialmente un'entità
+<!-- block-end: methods -->
+
+<!-- fragments-end -->
+
+---
+
+
+---
+
+## I codici di risposta HTTP
+<!-- fragments-start -->
+<!-- block-start: methods -->
+`2xx`: Indica tipicamente uno stato di successo, il più famoso è 200
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`3xx`: Indica tipicamente un redirect, i più famosi sono 301 (permanente) e 302 (temporaneo)
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`4xx`: Indica la presenza di un errore nella richiesta del client, i più famosi sono 403 (forbidden), 404 (Not Found), 405 (method not allowed), *418 (I'm a teapot), LOL*
+<!-- block-end: methods -->
+<!-- block-start: methods -->
+`5xx`: Indica la presenza di un errore nella risposta del server, i più famosi sono 500 (Internal Server Error), 502 (Bad Gateway), 503 (Service Unavailable), 504 (Gateway Timeout)
+<!-- block-end: methods -->
+
+<!-- fragments-end -->
+
+---
+
+---
+
+## Alcuni headers importanti (richiesta)
+
+<!-- fragments-start -->
+`Accept: text/html`
+
+`Accept-Encoding: gzip, deflate, br`
+
+`Referrer: https://link.da/cui/?sono=arrivato`
+
+`Cookie: PHPSESSID=123456; GDPRAccettata=1; chiave=valore`
+
+`Authorization: Bearer token`
+
+<!-- fragments-end -->
+<!--
+`Origin: https://link.da.cui.sto.facendo.una.chiamata`
+`Access-Control-Request-Headers: X-Custom-Header, Upgrade-Insecure-Requests`
+
+`Access-Control-Request-Method: POST, GET, OPTIONS`
+-->
+
+---
+
+### I MIME types
+
+import { IFrame } from '../scripts/IFrame';
+
+<IFrame src="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types"/>
+
+---
+
+## Alcuni headers importanti (risposta)
+
+<!--
+
+`Access-Control-Allow-Origin: http://localhost:8000`
+
+`Access-Control-Allow-Credentials: true`
+
+`Access-Control-Allow-Headers: X-Custom-Header, Upgrade-Insecure-Requests`
+
+`Access-Control-Allow-Methods: POST, GET, OPTIONS`
+
+`X-Frame-Options: DENY`
+
+`Content-Security-Policy: default-src 'self' http://example.com; script-src *.google.com;`
+
+-->
+<!-- fragments-start -->
+`Server: Apache/2.2.14 (Win32)`
+
+`Allow: OPTIONS, GET, HEAD, POST`
+
+`Content-Disposition: attachment; filename="filename.jpg"`
+
+`Content-Type: text/html; charset=UTF-8`
+
+`Content-Length: 8`
+
+`Location: /index.html`
+
+`Set-Cookie: PHPSESSID=123456; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly`
+
+<!-- fragments-end -->
+
+---
+
+## Ok, questo è come comunicano, ma come faccio a vedere le pagine?
+>>>>>>> 0b896d2b17db3de5bde0e8cb1c3738100109a5b9:Lez1/slides/1-methods-headers.mdx
