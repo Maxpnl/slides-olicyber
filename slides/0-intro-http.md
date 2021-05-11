@@ -1,12 +1,12 @@
 <!-- classes: title -->
-
+<!-- section-title: intro -->
 # Introduzione al web ed alla web security
 Mattia Furlani
 
 Università di Pisa
 
 ---
-
+<!-- section-title: recap -->
 ## Come funziona il web? (breve recap)
 
 
@@ -28,7 +28,7 @@ Il webserver resta in ascolto su una determinata porta (tipicamente la 80 o la 4
 ## Ok... ma come fanno a comunicare?
 
 ---
-
+<!-- section-title: descrizione protocollo -->
 ## Il protocollo HTTP
 
 - Protocollo client server (stateless) basato su TCP
